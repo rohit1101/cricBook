@@ -22,24 +22,30 @@ class App extends React.Component {
     inpVal: "",
   }
 
-  PostInputHandler = (e) => {
+  UserInputHandler = (e) => {
     this.setState({ inpVal: e.target.value })
   }
 
-  PostButtonHandler = (e) => {
-    db.collection("users").add({
+  UserButtonHandler = (e) => {
+    db.collection("posts").doc(this.state.inpVal).set({
       post: this.state.inpVal,
+      createdAt: new Date().getTime(),
     })
     this.setState({ inpVal: "" })
+    // db.collection("users").doc(this.state.inpVal).set({
+    //   name: this.state.inpVal,
+    //   createdAt: new Date().getTime(),
+    // })
+    // this.setState({ inpVal: "" })
   }
 
   render() {
     return (
       <div className="App">
         <Query
-          eventHandler={this.PostInputHandler}
+          eventHandler={this.UserInputHandler}
           val={this.state.inpVal}
-          btnHandler={this.PostButtonHandler}
+          btnHandler={this.UserButtonHandler}
         />
       </div>
     )
