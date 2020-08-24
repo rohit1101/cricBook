@@ -1,10 +1,15 @@
 import React from "react"
 
-function Query() {
+function Query({ val, eventHandler, btnHandler }) {
   return (
     <div>
-      <input type="text" />
-      <button>Add Post</button>
+      <input
+        type="text"
+        value={val}
+        onChange={eventHandler}
+        placeholder="Enter UserName"
+      />
+      <button onClick={btnHandler}>Login</button>
     </div>
   )
 }
