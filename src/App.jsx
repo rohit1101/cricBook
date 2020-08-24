@@ -31,6 +31,8 @@ class App extends React.Component {
       post: this.state.inpVal,
       createdAt: new Date().getTime(),
     })
+
+    // .then((docRef) => console.log(docRef))
     this.setState({ inpVal: "" })
     // db.collection("users").doc(this.state.inpVal).set({
     //   name: this.state.inpVal,
