@@ -1,29 +1,8 @@
 import React from "react"
-import firebase from "firebase/app"
-import "firebase/firestore"
-import "./App.css"
-import Route from "./Route"
-let firebaseConfig = {
-  apiKey: "AIzaSyCXhO2DyHb7XF8xhTIq34yqkDrDQHGQpo8",
-  authDomain: "firestoreproject-1ce2d.firebaseapp.com",
-  databaseURL: "https://firestoreproject-1ce2d.firebaseio.com",
-  projectId: "firestoreproject-1ce2d",
-  storageBucket: "firestoreproject-1ce2d.appspot.com",
-  messagingSenderId: "111051122791",
-  appId: "1:111051122791:web:5786164e181d6fa9e74cc2",
-}
-
-firebase.initializeApp(firebaseConfig)
-let db = firebase.firestore()
 
 class App extends React.Component {
   render() {
-    return (
-      <div className="App">
-        <Route />
-        <h1>Hello</h1>
-      </div>
-    )
+    return <h1>Auth page</h1>
   }
 }
 
