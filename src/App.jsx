@@ -2,7 +2,6 @@ import React from "react"
 import firebase from "firebase/app"
 import "firebase/firestore"
 import "./App.css"
-import Query from "./helpers/querying.js"
 
 let firebaseConfig = {
   apiKey: "AIzaSyCXhO2DyHb7XF8xhTIq34yqkDrDQHGQpo8",
@@ -18,37 +17,10 @@ firebase.initializeApp(firebaseConfig)
 let db = firebase.firestore()
 
 class App extends React.Component {
-  state = {
-    inpVal: "",
-  }
-
-  UserInputHandler = (e) => {
-    this.setState({ inpVal: e.target.value })
-  }
-
-  UserButtonHandler = (e) => {
-    db.collection("posts").doc(this.state.inpVal).set({
-      post: this.state.inpVal,
-      createdAt: new Date().getTime(),
-    })
-
-    // .then((docRef) => console.log(docRef))
-    this.setState({ inpVal: "" })
-    // db.collection("users").doc(this.state.inpVal).set({
-    //   name: this.state.inpVal,
-    //   createdAt: new Date().getTime(),
-    // })
-    // this.setState({ inpVal: "" })
-  }
-
   render() {
     return (
       <div className="App">
-        <Query
-          eventHandler={this.UserInputHandler}
-          val={this.state.inpVal}
-          btnHandler={this.UserButtonHandler}
-        />
+        <h1>Hello</h1>
       </div>
     )
   }
