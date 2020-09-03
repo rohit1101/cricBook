@@ -2,7 +2,7 @@ import React from "react"
 import firebase from "firebase/app"
 import "firebase/firestore"
 import "./App.css"
-
+import Route from "./Route"
 let firebaseConfig = {
   apiKey: "AIzaSyCXhO2DyHb7XF8xhTIq34yqkDrDQHGQpo8",
   authDomain: "firestoreproject-1ce2d.firebaseapp.com",
@@ -20,6 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Route />
         <h1>Hello</h1>
       </div>
     )
