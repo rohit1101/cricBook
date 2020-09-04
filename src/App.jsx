@@ -1,6 +1,7 @@
 import React from "react"
 import firebase from "firebase/app"
 import "firebase/auth"
+import { googleAuthHandler } from "./AuthConfig"
 // import "firebase/firestore"
 
 import firebaseConfig from "./firebaseConfig"
@@ -13,17 +14,7 @@ class App extends React.Component {
   }
 
   handleAuthClick = (e) => {
-    let provider = new firebase.auth.GoogleAuthProvider()
-
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(function (result) {
-        let token = result.credential.accessToken
-        let user = result.user
-        console.log(user.email, user.uid, user.displayName)
-      })
-
+    googleAuthHandler()
     // this.setState({ user_arr: user })
     // this.setState({ loginState: !this.state.loginState })
   }
