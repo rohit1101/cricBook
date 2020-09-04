@@ -13,17 +13,26 @@ class App extends React.Component {
     user_arr: [],
   }
 
-  handleAuthClick = (e) => {
+  handleAuthClick = async (e) => {
     googleAuthHandler()
-    // this.setState({ user_arr: user })
-    // this.setState({ loginState: !this.state.loginState })
+
+    const userData = await googleAuthHandler()
+    console.log(userData)
+    const userInfo = Object.values(userData)
+    console.log(userInfo[2])
+
+    this.setState({ user_arr: [userInfo[2].profile] })
+    this.setState({ loginState: true })
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.handleAuthClick}>Login with Google</button>
-        {this.state.loginState && <h1>Welcome to home page</h1>}
+        {this.state.loginState ? (
+          <h1>Welcome to home page</h1>
+        ) : (
+          <button onClick={this.handleAuthClick}>Login with Google</button>
+        )}
       </div>
     )
   }

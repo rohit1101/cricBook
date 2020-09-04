@@ -1,10 +1,10 @@
 import firebase from "firebase/app"
 import "firebase/auth"
 
-export function googleAuthHandler() {
+export async function googleAuthHandler() {
   let provider = new firebase.auth.GoogleAuthProvider()
 
-  return firebase
+  let data = await firebase
     .auth()
     .signInWithPopup(provider)
     .then(function (result) {
@@ -12,4 +12,6 @@ export function googleAuthHandler() {
       let user = result.user
       console.log(user.email, user.uid, user.displayName)
     })
+
+  return data
 }
