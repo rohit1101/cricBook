@@ -1,8 +1,7 @@
 import React from "react"
 // import { Link } from "@reach/router"
 
-function Login({ LoginHandler, userId }) {
-  console.log(userId.id)
+function Login({ LoginHandler }) {
   return (
     <div>
       <h1>CricBook</h1>

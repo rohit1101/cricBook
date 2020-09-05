@@ -4,6 +4,7 @@ import "firebase/auth"
 import { googleAuthHandler } from "./AuthConfig"
 import Login from "./Components/LoginPageComponent/Login"
 import Home from "./Components/HomePageComponent/Home"
+import { Redirect } from "@reach/router"
 // import "firebase/firestore"
 
 import firebaseConfig from "./firebaseConfig"
@@ -37,10 +38,11 @@ class App extends React.Component {
         {this.state.user_arr.length ? (
           <Home LogOutHandler={this.handleLogOutClick} />
         ) : (
-          <Login
-            LoginHandler={this.handleAuthClick}
-            userId={this.state.user_arr}
-          />
+          <div>
+            <h1>CricBook</h1>
+            <p>Your Opinion of Cricket!</p>
+            <button onClick={this.handleAuthClick}>Login with google</button>
+          </div>
         )}
       </div>
     )
