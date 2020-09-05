@@ -2,8 +2,8 @@ import React from "react"
 import firebase from "firebase/app"
 import "firebase/auth"
 import { googleAuthHandler } from "./AuthConfig"
-// import Login from "./Components/LoginComponent/Login"
-// import Home from "./Components/HomePageComponent/Home"
+import Login from "./Components/LoginPageComponent/Login"
+import Home from "./Components/HomePageComponent/Home"
 // import "firebase/firestore"
 
 import firebaseConfig from "./firebaseConfig"
@@ -35,17 +35,12 @@ class App extends React.Component {
     return (
       <div>
         {this.state.user_arr.length ? (
-          <div>
-            <h1>CricBook</h1>
-            <p>Welcome to Home Page</p>
-            <button onClick={this.handleLogOutClick}>Log Out</button>
-          </div>
+          <Home LogOutHandler={this.handleLogOutClick} />
         ) : (
-          <div>
-            <h1>CricBook</h1>
-            <p>Your Opinion of Cricket</p>
-            <button onClick={this.handleAuthClick}>Login with Google</button>
-          </div>
+          <Login
+            LoginHandler={this.handleAuthClick}
+            userId={this.state.user_arr}
+          />
         )}
       </div>
     )
