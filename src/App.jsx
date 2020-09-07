@@ -3,7 +3,7 @@ import firebase from "firebase/app"
 import "firebase/auth"
 import { navigate } from "@reach/router"
 import { googleAuthHandler } from "./AuthConfig"
-import Login from "./Components/LoginPageComponent/Login"
+
 import Home from "./Components/HomePageComponent/Home"
 
 // import "firebase/firestore"
@@ -26,7 +26,7 @@ class App extends React.Component {
 
   handleLogOutClick = (e) => {
     this.setState({ user_arr: [] })
-    navigate("/login")
+    // navigate("/")
   }
 
   componentDidUpdate = (prevState) => {
@@ -41,11 +41,10 @@ class App extends React.Component {
         {this.state.user_arr.length ? (
           <Home LogOutHandler={this.handleLogOutClick} />
         ) : (
-          /* <Login LoginHandler={this.handleAuthClick} /> */
           <div>
             <h1>CricBook</h1>
             <p>Your Opinion of Cricket!</p>
-            <button onClick={this.handleAuthClick}>Login with google</button>
+            <button onClick={this.handleAuthClick}>Login with Google</button>
           </div>
         )}
       </div>

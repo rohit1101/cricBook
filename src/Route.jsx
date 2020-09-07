@@ -1,7 +1,6 @@
 import React from "react"
 import { Router } from "@reach/router"
 import App from "./App"
-import Login from "./Components/LoginPageComponent/Login"
 import Home from "./Components/HomePageComponent/Home"
 
 function Route() {
@@ -9,7 +8,6 @@ function Route() {
     <Router>
       <App path="/" />
       <Home path="/home" />
-      <Login path="/login" />
     </Router>
   )
 }
