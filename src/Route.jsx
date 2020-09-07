@@ -6,8 +6,8 @@ import Home from "./Components/HomePageComponent/Home"
 function Route() {
   return (
     <Router>
-      <App path="/" />
-      <Home path="/home" />
+      <App path="/" exact />
+      <Home path="/home" exact />
     </Router>
   )
 }

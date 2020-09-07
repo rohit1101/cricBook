@@ -26,7 +26,7 @@ class App extends React.Component {
 
   handleLogOutClick = (e) => {
     this.setState({ user_arr: [] })
-    // navigate("/")
+    navigate("/")
   }
 
   componentDidUpdate = (prevState) => {

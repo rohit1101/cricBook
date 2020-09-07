@@ -5,9 +5,7 @@ function Home({ LogOutHandler }) {
     <div>
       <h1>CricBook</h1>
       <p>Welcome to Home Page</p>
-      <Link to="/">
-        <button onClick={LogOutHandler}>LogOut</button>
-      </Link>
+      <button onClick={LogOutHandler}>Log Out</button>
     </div>
   )
 }
