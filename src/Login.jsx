@@ -16,12 +16,14 @@ class Login extends React.Component {
     localStorage.setItem("user_arr", JSON.stringify([userInfo[2].profile]))
     navigate("/home")
   }
-
-  // componentDidUpdate = (prevState) => {
-  //   if (prevState.user_arr !== this.state.user_arr) {
-  //     localStorage.setItem("user_arr", JSON.stringify(this.state.user_arr))
-  //   }
-  // }
+  componentDidMount() {
+    if (JSON.parse(localStorage.getItem("user_arr")).length) {
+      navigate("/home", { replace: true })
+    }
+    if (!JSON.parse(localStorage.getItem("user_arr")).length) {
+      navigate("/", { replace: true })
+    }
+  }
 
   render() {
     return (

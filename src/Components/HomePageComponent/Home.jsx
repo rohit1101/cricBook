@@ -4,7 +4,6 @@ import { navigate } from "@reach/router"
 class Home extends React.Component {
   state = {
     user_arr: JSON.parse(localStorage.getItem("user_arr")) || [],
-    loginStatus: false,
   }
 
   handleLogOutClick = (e) => {
@@ -13,7 +12,12 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ loginStatus: true })
+    if (!JSON.parse(localStorage.getItem("user_arr")).length) {
+      navigate("/", { replace: true })
+    }
+    if (JSON.parse(localStorage.getItem("user_arr")).length) {
+      navigate("/home", { replace: true })
+    }
   }
 
   componentDidUpdate(prevState) {
@@ -34,7 +38,10 @@ class Home extends React.Component {
 }
 
 export default Home
-
-/* <Link to="/">
-<button onClick={LogOutHandler}>Log Out</button>
-</Link> */
+// return (
+// <div>
+//   <h1>CricBook</h1>
+//   <p>Welcome to </p>
+//   <button onClick={this.handleLogOutClick}>Log Out</button>
+// </div>
+// )
