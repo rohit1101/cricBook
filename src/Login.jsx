@@ -17,24 +17,28 @@ class Login extends React.Component {
     navigate("/home")
   }
 
-  componentDidMount() {
-    if (localStorage.user_arr) {
-      // navigate("/home")
-      return <Redirect to="/home" />
-    }
-    // if (JSON.parse(localStorage.getItem("user_arr")).length !== 0) {
-    //   navigate("/home")
-    // }
-  }
+  // componentDidMount() {
+  //   if (localStorage.user_arr) {
+  //     // navigate("/home")
+  //     return <Redirect to="/home" />
+  //   }
+  //   // if (JSON.parse(localStorage.getItem("user_arr")).length !== 0) {
+  //   //   navigate("/home")
+  //   // }
+  // }
 
   render() {
     return (
       <div>
-        <div>
-          <h1>CricBook</h1>
-          <p>Your Opinion of Cricket!</p>
-          <button onClick={this.handleAuthClick}>Login with Google</button>
-        </div>
+        {localStorage.user_arr ? (
+          <Redirect to="/home" />
+        ) : (
+          <div>
+            <h1>CricBook</h1>
+            <p>Your Opinion of Cricket!</p>
+            <button onClick={this.handleAuthClick}>Login with Google</button>
+          </div>
+        )}
       </div>
     )
   }

@@ -11,15 +11,15 @@ class Home extends React.Component {
     navigate("/")
   }
 
-  componentDidMount() {
-    if (!localStorage.user_arr) {
-      // navigate("/")
-      return <Redirect to="/" />
-    }
-    // if (JSON.parse(localStorage.getItem("user_arr")).length === 0) {
-    //   navigate("/")
-    // }
-  }
+  // componentDidMount() {
+  //   if (!localStorage.user_arr) {
+  //     // navigate("/")
+  //     return <Redirect to="/" />
+  //   }
+  //   // if (JSON.parse(localStorage.getItem("user_arr")).length === 0) {
+  //   //   navigate("/")
+  //   // }
+  // }
 
   componentDidUpdate(prevState) {
     if (prevState !== this.state.user_arr) {
@@ -30,9 +30,15 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>CricBook</h1>
-        <p>Welcome to </p>
-        <button onClick={this.handleLogOutClick}>Log Out</button>
+        {!localStorage.user_arr ? (
+          <Redirect to="/" />
+        ) : (
+          <div>
+            <h1>CricBook</h1>
+            <p>Welcome to </p>
+            <button onClick={this.handleLogOutClick}>Log Out</button>
+          </div>
+        )}
       </div>
     )
   }
