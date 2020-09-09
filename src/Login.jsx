@@ -1,7 +1,7 @@
 import React from "react"
 import firebase from "firebase/app"
 import "firebase/auth"
-import { navigate } from "@reach/router"
+import { navigate, Redirect } from "@reach/router"
 import { googleAuthHandler } from "./AuthConfig"
 
 import firebaseConfig from "./firebaseConfig"
@@ -16,13 +16,15 @@ class Login extends React.Component {
     localStorage.setItem("user_arr", JSON.stringify([userInfo[2].profile]))
     navigate("/home")
   }
+
   componentDidMount() {
-    if (JSON.parse(localStorage.getItem("user_arr")).length) {
-      navigate("/home", { replace: true })
+    if (localStorage.user_arr) {
+      // navigate("/home")
+      return <Redirect to="/home" />
     }
-    if (!JSON.parse(localStorage.getItem("user_arr")).length) {
-      navigate("/", { replace: true })
-    }
+    // if (JSON.parse(localStorage.getItem("user_arr")).length !== 0) {
+    //   navigate("/home")
+    // }
   }
 
   render() {

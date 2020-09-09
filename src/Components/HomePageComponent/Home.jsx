@@ -1,5 +1,5 @@
 import React from "react"
-import { navigate } from "@reach/router"
+import { navigate, Redirect } from "@reach/router"
 
 class Home extends React.Component {
   state = {
@@ -12,12 +12,13 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    if (!JSON.parse(localStorage.getItem("user_arr")).length) {
-      navigate("/", { replace: true })
+    if (!localStorage.user_arr) {
+      // navigate("/")
+      return <Redirect to="/" />
     }
-    if (JSON.parse(localStorage.getItem("user_arr")).length) {
-      navigate("/home", { replace: true })
-    }
+    // if (JSON.parse(localStorage.getItem("user_arr")).length === 0) {
+    //   navigate("/")
+    // }
   }
 
   componentDidUpdate(prevState) {
