@@ -1,19 +1,19 @@
-import React from "react";
-import { navigate, Redirect } from "@reach/router";
+import React from "react"
+import { navigate, Redirect } from "@reach/router"
 
 class Home extends React.Component {
   state = {
     user_arr: JSON.parse(localStorage.getItem("user_arr")) || [],
-  };
+  }
 
   handleLogOutClick = (e) => {
-    localStorage.removeItem("user_arr");
-    navigate("/");
-  };
+    localStorage.removeItem("user_arr")
+    navigate("/")
+  }
 
   render() {
     if (!localStorage.user_arr) {
-      return <Redirect to="/" noThrow />;
+      return <Redirect to="/" noThrow />
     }
 
     return (
@@ -22,8 +22,8 @@ class Home extends React.Component {
         <p>Welcome to </p>
         <button onClick={this.handleLogOutClick}>Log Out</button>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
