@@ -1,5 +1,7 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
+import UserInfo from "./UserInfo"
+import Posts from "../PostsComponent/Posts"
 
 class Home extends React.Component {
   state = {
@@ -12,15 +14,23 @@ class Home extends React.Component {
   }
 
   render() {
-    if (!localStorage.user_arr) {
-      return <Redirect to="/" noThrow />
-    }
+    // if (!localStorage.user_arr) {
+    //   return <Redirect to="/" noThrow />
+    // }
 
     return (
       <div>
-        <h1>Home</h1>
-        <p>Welcome to </p>
-        <button onClick={this.handleLogOutClick}>Log Out</button>
+        {!localStorage.user_arr ? (
+          <Redirect to="/" noThrow />
+        ) : (
+          <div>
+            <UserInfo
+              userProfile={this.state.user_arr}
+              logOutHandler={this.handleLogOutClick}
+            />
+            <Posts />
+          </div>
+        )}
       </div>
     )
   }

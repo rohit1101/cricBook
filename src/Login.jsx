@@ -16,15 +16,21 @@ class Login extends React.Component {
   }
 
   render() {
-    if (localStorage.user_arr) {
-      return <Redirect to="/home" noThrow />
-    }
+    // if (localStorage.user_arr) {
+    //   return <Redirect to="/home" noThrow />
+    // }
 
     return (
       <div>
-        <h1>CricBook</h1>
-        <p>Your Opinion of Cricket!</p>
-        <button onClick={this.handleAuthClick}>Login with Google</button>
+        {localStorage.user_arr ? (
+          <Redirect to="/home" noThrow />
+        ) : (
+          <div>
+            <h1>CricBook</h1>
+            <p>Your Opinion of Cricket!</p>
+            <button onClick={this.handleAuthClick}>Login with Google</button>
+          </div>
+        )}
       </div>
     )
   }
