@@ -1,13 +1,16 @@
 import { db } from "../firebaseConfig"
 
 async function getAllPosts() {
-  return await db
-    .collection("users")
-    .doc("Penny")
+  let allPosts = []
+  await db
+    .collection("posts")
     .get()
     .then((doc) => {
-      return doc.data()
+      doc.forEach((doc) => {
+        allPosts.push(doc.data())
+      })
     })
+  return allPosts
 }
 
 export default getAllPosts

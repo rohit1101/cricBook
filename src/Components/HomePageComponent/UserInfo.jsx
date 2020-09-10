@@ -1,11 +1,12 @@
 import React from "react"
 
 function UserInfo({ userProfile, logOutHandler }) {
+  let i = 0
   return (
     <div>
       {userProfile.map((userData) => {
         return (
-          <div>
+          <div key={i++}>
             <img
               src={userData.picture}
               alt="Display_Picture"
