@@ -1,11 +1,6 @@
 import React from "react"
-import firebase from "firebase/app"
-import "firebase/auth"
 import { navigate, Redirect } from "@reach/router"
-import { googleAuthHandler } from "./AuthConfig"
-
-import firebaseConfig from "./firebaseConfig"
-firebase.initializeApp(firebaseConfig)
+import { googleAuthHandler } from "./firebaseConfig"
 
 class Login extends React.Component {
   handleAuthClick = async (e) => {
@@ -16,10 +11,6 @@ class Login extends React.Component {
   }
 
   render() {
-    // if (localStorage.user_arr) {
-    //   return <Redirect to="/home" noThrow />
-    // }
-
     return (
       <div>
         {localStorage.user_arr ? (

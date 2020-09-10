@@ -1,7 +1,6 @@
 import React from "react"
 
 function UserInfo({ userProfile, logOutHandler }) {
-  console.log(this)
   return (
     <div>
       {userProfile.map((userData) => {

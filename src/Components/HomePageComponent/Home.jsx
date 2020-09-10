@@ -14,10 +14,6 @@ class Home extends React.Component {
   }
 
   render() {
-    // if (!localStorage.user_arr) {
-    //   return <Redirect to="/" noThrow />
-    // }
-
     return (
       <div>
         {!localStorage.user_arr ? (
