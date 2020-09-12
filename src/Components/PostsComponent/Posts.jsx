@@ -8,39 +8,39 @@ class Posts extends React.Component {
   }
 
   async componentDidMount() {
-    const postsFromDb = await getAllPosts()
-    console.log(postsFromDb)
-    this.setState({ posts_arr: postsFromDb })
     this.setState({ loading: true })
+    const postsFromDb = await getAllPosts()
+    this.setState({ posts_arr: postsFromDb })
+    this.setState({ loading: false })
   }
 
   render() {
     const posts = [...this.state.posts_arr]
+
     let i = 0
+
+    if (this.state.loading) {
+      return "loading..."
+    }
+
     return (
       <div>
-        {this.state.posts_arr ? (
+        {this.state.posts_arr && this.state.posts_arr.length ? (
           <div>
-            {!this.state.posts_arr.length ? (
-              "loading..."
-            ) : (
-              <div>
-                {posts.map((post) => {
-                  return (
-                    <div key={i++}>
-                      <h1>{post.post}</h1>
-                      <h3>
-                        posted at{" "}
-                        {new Date(post.createdAt).toLocaleTimeString()}
-                      </h3>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
+            {posts.map((post) => {
+              return (
+                <div key={i++}>
+                  <h1>{post.post}</h1>
+                  <h3>
+                    posted at
+                    {new Date(post.createdAt).toLocaleTimeString()}
+                  </h3>
+                </div>
+              )
+            })}
           </div>
         ) : (
-          `No posts to display 😞.`
+          "No post to display"
         )}
       </div>
     )
@@ -48,3 +48,29 @@ class Posts extends React.Component {
 }
 
 export default Posts
+
+/* <div>
+{this.state.loading ? (
+  "loading.."
+) : (
+  <div>
+    {this.state.posts_arr && this.state.posts_arr.length ? (
+      <div>
+        {posts.map((post) => {
+          return (
+            <div key={i++}>
+              <h1>{post.post}</h1>
+              <h3>
+                posted at
+                {new Date(post.createdAt).toLocaleTimeString()}
+              </h3>
+            </div>
+          )
+        })}
+      </div>
+    ) : (
+      "No post to display"
+    )}
+  </div>
+)}
+</div> */
