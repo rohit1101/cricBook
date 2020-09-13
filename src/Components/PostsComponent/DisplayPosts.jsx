@@ -14,12 +14,12 @@ class DisplayPosts extends React.Component {
     this.setState({ loading: false })
   }
 
-  // async componentDidUpdate(prevState) {
-  //   if (prevState !== this.state.posts_arr) {
-  //     const postsFromDb = await getAllPosts()
-  //     this.setState({ posts_arr: postsFromDb })
-  //   }
-  // }
+  async componentDidUpdate(prevState) {
+    const postsFromDb = await getAllPosts()
+    if (prevState !== postsFromDb) {
+      this.setState({ posts_arr: postsFromDb })
+    }
+  }
 
   render() {
     const posts = [...this.state.posts_arr]

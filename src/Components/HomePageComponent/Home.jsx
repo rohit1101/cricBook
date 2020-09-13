@@ -2,7 +2,7 @@ import React from "react"
 import { navigate, Redirect } from "@reach/router"
 import UserInfo from "./UserInfo"
 import DisplayPosts from "../PostsComponent/DisplayPosts"
-import CreatePosts from "../PostsComponent/CreatPosts"
+import CreatePosts from "../PostsComponent/CreatePosts"
 
 class Home extends React.Component {
   state = {
