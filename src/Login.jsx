@@ -1,18 +1,15 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
 import { googleAuthHandler } from "./firebaseConfig"
-import { db } from "./firebaseConfig.js"
+import userLogin from "./helpers/userLogin"
+
 class Login extends React.Component {
   handleAuthClick = async (e) => {
     const userData = await googleAuthHandler()
     const userInfo = Object.values(userData)
     localStorage.setItem("user_arr", JSON.stringify([userInfo[2].profile]))
     navigate("/home")
-
-    db.collection("users").doc(userInfo[2].profile.name).set({
-      username: userInfo[2].profile.name,
-      email: userInfo[2].profile.email,
-    })
+    userLogin(userInfo[2].profile)
   }
 
   render() {

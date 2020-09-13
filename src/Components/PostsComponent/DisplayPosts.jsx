@@ -1,7 +1,7 @@
 import React from "react"
 import getAllPosts from "../../helpers/allPosts"
 
-class Posts extends React.Component {
+class DisplayPosts extends React.Component {
   state = {
     posts_arr: [],
     loading: false,
@@ -13,6 +13,13 @@ class Posts extends React.Component {
     this.setState({ posts_arr: postsFromDb })
     this.setState({ loading: false })
   }
+
+  // async componentDidUpdate(prevState) {
+  //   if (prevState !== this.state.posts_arr) {
+  //     const postsFromDb = await getAllPosts()
+  //     this.setState({ posts_arr: postsFromDb })
+  //   }
+  // }
 
   render() {
     const posts = [...this.state.posts_arr]
@@ -30,10 +37,11 @@ class Posts extends React.Component {
             {posts.map((post) => {
               return (
                 <div key={i++}>
-                  <h1>{post.post}</h1>
+                  <h1>{post.title}</h1>
+                  <h2>{post.desc}</h2>
                   <h3>
-                    posted at
-                    {new Date(post.createdAt).toLocaleTimeString()}
+                    posted at{" "}
+                    {new Date(Number(post.createdAt)).toLocaleTimeString()}.
                   </h3>
                 </div>
               )
@@ -47,30 +55,4 @@ class Posts extends React.Component {
   }
 }
 
-export default Posts
-
-/* <div>
-{this.state.loading ? (
-  "loading.."
-) : (
-  <div>
-    {this.state.posts_arr && this.state.posts_arr.length ? (
-      <div>
-        {posts.map((post) => {
-          return (
-            <div key={i++}>
-              <h1>{post.post}</h1>
-              <h3>
-                posted at
-                {new Date(post.createdAt).toLocaleTimeString()}
-              </h3>
-            </div>
-          )
-        })}
-      </div>
-    ) : (
-      "No post to display"
-    )}
-  </div>
-)}
-</div> */
+export default DisplayPosts

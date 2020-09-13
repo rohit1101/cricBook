@@ -1,7 +1,8 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
 import UserInfo from "./UserInfo"
-import Posts from "../PostsComponent/Posts"
+import DisplayPosts from "../PostsComponent/DisplayPosts"
+import CreatePosts from "../PostsComponent/CreatPosts"
 
 class Home extends React.Component {
   state = {
@@ -24,7 +25,8 @@ class Home extends React.Component {
               userProfile={this.state.user_arr}
               logOutHandler={this.handleLogOutClick}
             />
-            <Posts />
+            <CreatePosts />
+            <DisplayPosts />
           </div>
         )}
       </div>
