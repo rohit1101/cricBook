@@ -15,8 +15,9 @@ class CreatePosts extends React.Component {
     this.setState({ descValue: e.target.value })
   }
 
-  cricPostBtnHandler = (e) => {
-    createNewPost(this.state.titleValue, this.state.descValue)
+  cricPostBtnHandler = async (e) => {
+    const id = await createNewPost(this.state.titleValue, this.state.descValue)
+    console.log(id)
     this.setState({ titleValue: "", descValue: "" })
   }
 
