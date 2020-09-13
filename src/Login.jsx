@@ -8,8 +8,8 @@ class Login extends React.Component {
     const userInfo = Object.values(userData)
     localStorage.setItem("user_arr", JSON.stringify([userInfo[2].profile]))
     navigate("/home")
-    console.log(userInfo[2].profile.name)
-    db.collection("users").doc(userInfo[2].profile.name.split(" ")[0]).set({
+
+    db.collection("users").doc(userInfo[2].profile.name).set({
       username: userInfo[2].profile.name,
       email: userInfo[2].profile.email,
     })
