@@ -2,6 +2,7 @@ import React from "react"
 import getAllPosts from "../../helpers/allPosts"
 import createNewPost from "../../helpers/CreatePosts"
 import getUniquePost from "../../helpers/getUniquePost"
+import CreatePost from "./CreatePost"
 
 class DisplayPosts extends React.Component {
   state = {
@@ -47,28 +48,13 @@ class DisplayPosts extends React.Component {
 
     return (
       <div>
-        <div>
-          <h1>Create a new post</h1>
-          <label style={{ display: "block" }}>Title of the Post:</label>
-          <input
-            type="text"
-            value={this.state.titleValue}
-            onChange={this.titleInputHandler}
-          />
-          <label style={{ display: "block" }}>Description of the Post:</label>
-          <input
-            type="text"
-            value={this.state.descValue}
-            onChange={this.descInputHandler}
-          />
-          {this.state.titleValue && this.state.descValue ? (
-            <button onClick={this.cricPostBtnHandler}>
-              Create a Cric Post
-            </button>
-          ) : (
-            <button disabled>Create a Cric Post</button>
-          )}
-        </div>
+        <CreatePost
+          title={this.state.titleValue}
+          desc={this.state.descValue}
+          titleInpHandler={this.titleInputHandler}
+          descInputHandler={this.descInputHandler}
+          createBtnHandler={this.cricPostBtnHandler}
+        />
 
         <div>
           {this.state.posts_arr && this.state.posts_arr.length ? (
