@@ -3,7 +3,7 @@ import { navigate, Redirect } from "@reach/router"
 import UserInfo from "./UserInfo"
 import DisplayPosts from "../PostsComponent/DisplayPosts"
 
-class Home extends React.Component {
+class AuthorisedUser extends React.Component {
   state = {
     user_arr: JSON.parse(localStorage.getItem("user_arr")) || [],
   }
@@ -32,4 +32,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default AuthorisedUser

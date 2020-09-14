@@ -22,8 +22,11 @@ class DisplayPosts extends React.Component {
   cricPostBtnHandler = async (e) => {
     const id = await createNewPost(this.state.titleValue, this.state.descValue)
     const newPostArr = await getUniquePost(id)
-    this.setState({ posts_arr: [...this.state.posts_arr, newPostArr] })
-    this.setState({ titleValue: "", descValue: "" })
+    this.setState({
+      posts_arr: [...this.state.posts_arr, newPostArr],
+      titleValue: "",
+      descValue: "",
+    })
   }
 
   async componentDidMount() {
@@ -36,7 +39,7 @@ class DisplayPosts extends React.Component {
   render() {
     const posts = [...this.state.posts_arr]
 
-    let i = 0
+    // let i = 0
 
     if (this.state.loading) {
       return "loading..."
@@ -72,7 +75,7 @@ class DisplayPosts extends React.Component {
             <div>
               {posts.map((post) => {
                 return (
-                  <div key={i++}>
+                  <div key={post.createdAt}>
                     <h1>{post.title}</h1>
                     <h2>{post.desc}</h2>
                     <h3>
