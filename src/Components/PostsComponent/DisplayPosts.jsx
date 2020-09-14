@@ -1,10 +1,29 @@
 import React from "react"
 import getAllPosts from "../../helpers/allPosts"
+import createNewPost from "../../helpers/CreatePosts"
+import getUniquePost from "../../helpers/getUniquePost"
 
 class DisplayPosts extends React.Component {
   state = {
     posts_arr: [],
     loading: false,
+    titleValue: "",
+    descValue: "",
+  }
+
+  titleInputHandler = (e) => {
+    this.setState({ titleValue: e.target.value })
+  }
+
+  descInputHandler = (e) => {
+    this.setState({ descValue: e.target.value })
+  }
+
+  cricPostBtnHandler = async (e) => {
+    const id = await createNewPost(this.state.titleValue, this.state.descValue)
+    const newPostArr = await getUniquePost(id)
+    this.setState({ posts_arr: [...this.state.posts_arr, newPostArr] })
+    this.setState({ titleValue: "", descValue: "" })
   }
 
   async componentDidMount() {
@@ -13,13 +32,6 @@ class DisplayPosts extends React.Component {
     this.setState({ posts_arr: postsFromDb })
     this.setState({ loading: false })
   }
-
-  // async componentDidUpdate(prevState) {
-  //   const postsFromDb = await getAllPosts()
-  //   if (prevState !== postsFromDb) {
-  //     this.setState({ posts_arr: postsFromDb })
-  //   }
-  // }
 
   render() {
     const posts = [...this.state.posts_arr]
@@ -32,24 +44,49 @@ class DisplayPosts extends React.Component {
 
     return (
       <div>
-        {this.state.posts_arr && this.state.posts_arr.length ? (
-          <div>
-            {posts.map((post) => {
-              return (
-                <div key={i++}>
-                  <h1>{post.title}</h1>
-                  <h2>{post.desc}</h2>
-                  <h3>
-                    posted at{" "}
-                    {new Date(Number(post.createdAt)).toLocaleTimeString()}.
-                  </h3>
-                </div>
-              )
-            })}
-          </div>
-        ) : (
-          "No post to display"
-        )}
+        <div>
+          <h1>Create a new post</h1>
+          <label style={{ display: "block" }}>Title of the Post:</label>
+          <input
+            type="text"
+            value={this.state.titleValue}
+            onChange={this.titleInputHandler}
+          />
+          <label style={{ display: "block" }}>Description of the Post:</label>
+          <input
+            type="text"
+            value={this.state.descValue}
+            onChange={this.descInputHandler}
+          />
+          {this.state.titleValue && this.state.descValue ? (
+            <button onClick={this.cricPostBtnHandler}>
+              Create a Cric Post
+            </button>
+          ) : (
+            <button disabled>Create a Cric Post</button>
+          )}
+        </div>
+
+        <div>
+          {this.state.posts_arr && this.state.posts_arr.length ? (
+            <div>
+              {posts.map((post) => {
+                return (
+                  <div key={i++}>
+                    <h1>{post.title}</h1>
+                    <h2>{post.desc}</h2>
+                    <h3>
+                      posted at{" "}
+                      {new Date(Number(post.createdAt)).toLocaleTimeString()}.
+                    </h3>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            "No post to display"
+          )}
+        </div>
       </div>
     )
   }

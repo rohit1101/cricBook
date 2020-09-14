@@ -9,9 +9,6 @@ async function createNewPost(title, desc) {
       createdAt: new Date().getTime(),
     })
     .then((docRef) => docRef.id)
-  // const ref = await refId.id
-  // console.log(ref)
-  // return refId
 }
 
 export default createNewPost
