@@ -3,13 +3,13 @@ import { db } from "../firebaseConfig"
 export default async function sortPosts(sortBy) {
   let allPosts = []
 
-  if (sortBy === "asen") {
-    const res = await db.collection("posts").orderBy("createdAt").get()
-    await res.forEach((res) => allPosts.push(res.data()))
+  if (sortBy === "desc") {
+    const res = await db
+      .collection("posts")
+      .orderBy("createdAt", sortBy === "desc" ? sortBy : "asc")
+      .get()
+    const d = await res.forEach((res) => allPosts.push(res.data()))
+    console.log(d)
     return allPosts
   }
-
-  const res = await db.collection("posts").orderBy("createdAt", sortBy).get()
-  await res.forEach((res) => allPosts.push(res.data()))
-  return allPosts
 }
