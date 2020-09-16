@@ -1,7 +1,6 @@
 import React from "react"
 import getAllPosts from "../../helpers/allPosts"
 import createNewPost from "../../helpers/CreatePosts"
-import getUniquePost from "../../helpers/getUniquePost"
 import sortPosts from "../../helpers/SortPosts"
 // import SortPosts from "./SortPosts"
 
@@ -14,22 +13,20 @@ class DisplayPosts extends React.Component {
     sortValue: "",
   }
 
-  titleInputHandler = (e) => {
-    this.setState({ titleValue: e.target.value })
-  }
-
-  descInputHandler = (e) => {
-    this.setState({ descValue: e.target.value })
+  globalInputHandler = (e) => {
+    // const value = e.target.type === "text" ? e.target.value : ""
+    // const name = e.target.name
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   cricPostBtnHandler = async (e) => {
-    const id = await createNewPost(this.state.titleValue, this.state.descValue)
-    const newPostArr = await getUniquePost(id)
-    this.setState({
-      posts_arr: [...this.state.posts_arr, newPostArr],
-      titleValue: "",
-      descValue: "",
-    })
+    const newPost = {
+      title: this.state.titleValue,
+      description: this.state.descValue,
+      createdAt: new Date().getTime(),
+    }
+    await createNewPost(newPost)
+    this.setState({ titleValue: "", descValue: "" })
   }
 
   handleSortChange = async (e) => {
@@ -76,20 +73,22 @@ class DisplayPosts extends React.Component {
           <h1>Create a new post</h1>
           <label style={{ display: "block" }}>Title of the Post:</label>
           <input
+            name="titleValue"
             type="text"
-            onChange={this.titleInputHandler}
+            onChange={this.globalInputHandler}
             value={this.state.titleValue}
             placeholder="Fancy Title"
           />
           <label style={{ display: "block" }}>Description of the Post:</label>
           <input
+            name="descValue"
             type="text"
-            onChange={this.descInputHandler}
+            onChange={this.globalInputHandler}
             value={this.state.descValue}
             placeholder="Fancy Caption"
           />
           {this.state.titleValue && this.state.descValue ? (
-            <button onClick={this.state.cricPostBtnHandler}>
+            <button onClick={this.cricPostBtnHandler}>
               Create a Cric Post
             </button>
           ) : (
@@ -106,12 +105,13 @@ class DisplayPosts extends React.Component {
           </select>
           {/* <button onClick={this.handleClick}>Submit</button> */}
         </label>
+        {/* post render */}
         <div>
           {this.state.posts_arr && this.state.posts_arr.length ? (
             <div>
               {posts.map((post) => {
                 return (
-                  <div key={post.createdAt}>
+                  <div key={post.id}>
                     <h1>{post.title}</h1>
                     <h2>{post.desc}</h2>
                     <h3>

@@ -1,14 +1,11 @@
 import { db } from "../firebaseConfig"
 
-async function createNewPost(title, desc) {
-  return await db
-    .collection("posts")
-    .add({
-      title: title,
-      desc: desc,
-      createdAt: new Date().getTime(),
-    })
-    .then((docRef) => docRef.id)
+async function createNewPost(newPost) {
+  const docRef = db.collection("posts").doc()
+  return await docRef.set({
+    ...newPost,
+    id: docRef.id,
+  })
 }
 
 export default createNewPost
