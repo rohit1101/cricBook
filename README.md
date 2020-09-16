@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run(Changes made based on PR):
+In the project directory, you can run(Commits based on PR):
 
 ### `yarn start`
 
