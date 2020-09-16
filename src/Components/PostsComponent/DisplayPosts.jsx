@@ -2,6 +2,7 @@ import React from "react"
 import getAllPosts from "../../helpers/allPosts"
 import createNewPost from "../../helpers/CreatePosts"
 import sortPosts from "../../helpers/SortPosts"
+import getUniquePost from "../../helpers/getUniquePost"
 // import SortPosts from "./SortPosts"
 
 class DisplayPosts extends React.Component {
@@ -25,8 +26,13 @@ class DisplayPosts extends React.Component {
       description: this.state.descValue,
       createdAt: new Date().getTime(),
     }
-    await createNewPost(newPost)
-    this.setState({ titleValue: "", descValue: "" })
+    const id = await createNewPost(newPost)
+    const updatePostArr = await getUniquePost(id)
+    this.setState({
+      titleValue: "",
+      descValue: "",
+      posts_arr: [...this.state.posts_arr, updatePostArr],
+    })
   }
 
   handleSortChange = async (e) => {
@@ -36,10 +42,6 @@ class DisplayPosts extends React.Component {
       const sortedArr = await sortPosts("desc")
       this.setState({ posts_arr: sortedArr })
     }
-    // if (this.state.sortValue === "asen") {
-    // const sortedArr = await sortPosts()
-    // this.setState({ posts_arr: sortedArr })
-    // }
   }
 
   // handleClick = async (e) => {
@@ -113,7 +115,7 @@ class DisplayPosts extends React.Component {
                 return (
                   <div key={post.id}>
                     <h1>{post.title}</h1>
-                    <h2>{post.desc}</h2>
+                    <h2>{post.description}</h2>
                     <h3>
                       posted at{" "}
                       {new Date(Number(post.createdAt)).toLocaleTimeString()}.
