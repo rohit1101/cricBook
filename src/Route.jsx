@@ -1,13 +1,14 @@
 import React from "react"
 import { Router } from "@reach/router"
 import Login from "./Login"
-import AuthorisedUser from "./Components/HomePageComponent/AuthorisedUser"
+
+import AuthorisedHome from "./Components/HomePageComponent/AuthorisedHome"
 
 function Route() {
   return (
     <Router>
       <Login path="/" exact />
-      <AuthorisedUser path="/home" exact />
+      <AuthorisedHome path="/home" exact />
     </Router>
   )
 }
