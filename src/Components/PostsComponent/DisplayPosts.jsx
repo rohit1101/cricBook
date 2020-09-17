@@ -1,9 +1,6 @@
 import React from "react"
 import getAllPosts from "../../helpers/allPosts"
 import createNewPost from "../../helpers/CreatePosts"
-import sortPosts from "../../helpers/SortPosts"
-import getUniquePost from "../../helpers/getUniquePost"
-// import SortPosts from "./SortPosts"
 
 class DisplayPosts extends React.Component {
   state = {
@@ -27,33 +24,20 @@ class DisplayPosts extends React.Component {
       createdAt: new Date().getTime(),
     }
     const id = await createNewPost(newPost)
-    const updatePostArr = await getUniquePost(id)
+    const newPostWithId = { ...newPost, id }
+
     this.setState({
       titleValue: "",
       descValue: "",
-      posts_arr: [...this.state.posts_arr, updatePostArr],
+      posts_arr: [...this.state.posts_arr, newPostWithId],
     })
   }
 
   handleSortChange = async (e) => {
     this.setState({ sortValue: e.target.value })
-
-    if (this.state.sortValue === "desc") {
-      const sortedArr = await sortPosts("desc")
-      this.setState({ posts_arr: sortedArr })
-    }
+    const sortedArr = await getAllPosts({ sortBy: e.target.value })
+    this.setState({ posts_arr: sortedArr })
   }
-
-  // handleClick = async (e) => {
-  //   if (this.state.sortValue === "desc") {
-  //     const sortedArr = await sortPosts("desc")
-  //     this.setState({ posts_arr: sortedArr })
-  //   }
-  //   if (this.state.sortValue === "asen") {
-  //     const sortedArr = await sortPosts("asen")
-  //     this.setState({ posts_arr: sortedArr })
-  //   }
-  // }
 
   async componentDidMount() {
     this.setState({ loading: true })
@@ -101,11 +85,9 @@ class DisplayPosts extends React.Component {
         <label>
           Sort By:
           <select value={this.state.sortValue} onChange={this.handleSortChange}>
-            <option value="">Select an option</option>
-            <option value="asc">Recent Posts</option>
-            <option value="desc">Older Posts</option>
+            <option value="desc">Recent Posts</option>
+            <option value="asc">Older Posts</option>
           </select>
-          {/* <button onClick={this.handleClick}>Submit</button> */}
         </label>
         {/* post render */}
         <div>
