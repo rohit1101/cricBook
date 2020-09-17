@@ -1,55 +1,52 @@
 import React from "react"
-import getAllPosts from "../../helpers/allPosts"
 
 class DisplayPosts extends React.Component {
   state = {
-    posts_arr: [],
-    loading: false,
+    sortValue: "",
   }
 
-  async componentDidMount() {
-    this.setState({ loading: true })
-    const postsFromDb = await getAllPosts()
-    this.setState({ posts_arr: postsFromDb })
-    this.setState({ loading: false })
+  handleSortChange = async ({ target }) => {
+    this.setState({ sortValue: target.value })
+    this.props.sortPosts(target.value)
   }
-
-  // async componentDidUpdate(prevState) {
-  //   const postsFromDb = await getAllPosts()
-  //   if (prevState !== postsFromDb) {
-  //     this.setState({ posts_arr: postsFromDb })
-  //   }
-  // }
 
   render() {
-    const posts = [...this.state.posts_arr]
+    const { loading, posts_arr } = this.props
 
-    let i = 0
-
-    if (this.state.loading) {
+    if (loading) {
       return "loading..."
     }
 
     return (
       <div>
-        {this.state.posts_arr && this.state.posts_arr.length ? (
-          <div>
-            {posts.map((post) => {
-              return (
-                <div key={i++}>
-                  <h1>{post.title}</h1>
-                  <h2>{post.desc}</h2>
-                  <h3>
-                    posted at{" "}
-                    {new Date(Number(post.createdAt)).toLocaleTimeString()}.
-                  </h3>
-                </div>
-              )
-            })}
-          </div>
-        ) : (
-          "No post to display"
-        )}
+        <label>
+          Sort By:
+          <select value={this.state.sortValue} onChange={this.handleSortChange}>
+            <option value="desc">Recent Posts</option>
+            <option value="asc">Older Posts</option>
+          </select>
+        </label>
+
+        <div>
+          {posts_arr && posts_arr.length ? (
+            <div>
+              {posts_arr.map((post) => {
+                return (
+                  <div key={post.id}>
+                    <h1>{post.title}</h1>
+                    <h2>{post.description}</h2>
+                    <h3>
+                      posted at{" "}
+                      {new Date(Number(post.createdAt)).toLocaleTimeString()}.
+                    </h3>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            "No post to display"
+          )}
+        </div>
       </div>
     )
   }
