@@ -31,7 +31,9 @@ class CreatePostInput extends React.Component {
           placeholder="Fancy Caption"
         />
         <button
-          disabled={this.state.titleValue && this.state.descValue}
+          disabled={
+            !(this.state.titleValue.length && this.state.descValue.length)
+          }
           onClick={this.props.createCricPost}
         >
           Create a Cric Post
