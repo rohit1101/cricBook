@@ -14,7 +14,7 @@ class PostDetails extends Component {
 
   render() {
     const post = this.state.uniquePost
-    if (this.state.loading) return "laoding..."
+    if (this.state.loading) return "loading..."
     return (
       <div>
         <h1>{post.title}</h1>
