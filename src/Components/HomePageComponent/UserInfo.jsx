@@ -1,10 +1,9 @@
 import React from "react"
 
 function UserInfo({ userProfile, logOutHandler }) {
-  let i = 0
   return (
     <div>
-      <div key={i++}>
+      <div key={userProfile.id}>
         <img
           src={userProfile.picture}
           alt="Display_Picture"

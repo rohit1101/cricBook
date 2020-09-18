@@ -1,12 +1,8 @@
 import { db } from "../firebaseConfig"
 
-function userLogin(userInfo) {
-  db.collection("users").doc(userInfo.name).set({
-    username: userInfo.name,
-    email: userInfo.email,
-    displayImage: userInfo.picture,
-    createdAt: new Date().getTime(),
-  })
+async function userLogin(userInfo) {
+  const docRef = await db.collection("users").add(userInfo)
+  return docRef.id
 }
 
 export default userLogin

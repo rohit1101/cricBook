@@ -7,9 +7,10 @@ class Login extends React.Component {
   handleAuthClick = async (e) => {
     const userData = await googleAuthHandler()
     const userInfo = Object.values(userData)
+    const userID = await userLogin(userInfo[2].profile)
+    console.log(userID)
     localStorage.setItem("user_arr", JSON.stringify(userInfo[2].profile))
     navigate("/home")
-    userLogin(userInfo[2].profile)
   }
 
   render() {
