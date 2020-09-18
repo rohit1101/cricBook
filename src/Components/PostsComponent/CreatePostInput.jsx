@@ -34,7 +34,13 @@ class CreatePostInput extends React.Component {
           disabled={
             !(this.state.titleValue.length && this.state.descValue.length)
           }
-          onClick={this.props.createCricPost}
+          onClick={() => {
+            this.props.createCricPost(
+              this.state.titleValue,
+              this.state.descValue
+            )
+            this.setState({ titleValue: "", descValue: "" })
+          }}
         >
           Create a Cric Post
         </button>

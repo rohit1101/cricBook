@@ -23,10 +23,10 @@ class AuthorisedHome extends React.Component {
     this.setState({ posts_arr: postsFromDb, loading: false })
   }
 
-  createNewPost = async (e) => {
+  createNewPost = async (title, desc) => {
     const newPost = {
-      title: this.state.titleValue,
-      description: this.state.descValue,
+      title: title,
+      description: desc,
       createdAt: new Date().getTime(),
     }
 
@@ -34,7 +34,7 @@ class AuthorisedHome extends React.Component {
     const newPostWithId = { ...newPost, id }
 
     this.setState({
-      posts_arr: [...this.state.posts_arr, newPostWithId],
+      posts_arr: [newPostWithId, ...this.state.posts_arr],
     })
   }
 
