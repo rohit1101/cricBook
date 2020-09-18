@@ -5,7 +5,10 @@ async function getUniquePost(id) {
     .collection("posts")
     .doc(id)
     .get()
-    .then((post) => post.data())
+    .then((post) => ({
+      ...post.data(),
+      id: post.id,
+    }))
 }
 
 export default getUniquePost
