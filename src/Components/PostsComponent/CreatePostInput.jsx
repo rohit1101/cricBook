@@ -10,6 +10,11 @@ class CreatePostInput extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  createNewPostHandler = () => {
+    this.props.createCricPost(this.state.titleValue, this.state.descValue)
+    this.setState({ titleValue: "", descValue: "" })
+  }
+
   render() {
     return (
       <div>
@@ -34,13 +39,7 @@ class CreatePostInput extends React.Component {
           disabled={
             !(this.state.titleValue.length && this.state.descValue.length)
           }
-          onClick={() => {
-            this.props.createCricPost(
-              this.state.titleValue,
-              this.state.descValue
-            )
-            this.setState({ titleValue: "", descValue: "" })
-          }}
+          onClick={this.createNewPostHandler}
         >
           Create a Cric Post
         </button>

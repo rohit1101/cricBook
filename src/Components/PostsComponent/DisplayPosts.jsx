@@ -5,7 +5,7 @@ class DisplayPosts extends React.Component {
     sortValue: "",
   }
 
-  handleSortChange = async ({ target }) => {
+  handleSortChange = ({ target }) => {
     this.setState({ sortValue: target.value })
     this.props.sortPosts(target.value)
   }
