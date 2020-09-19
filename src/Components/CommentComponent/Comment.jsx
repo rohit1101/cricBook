@@ -33,10 +33,16 @@ export default class Comment extends Component {
 
   async componentDidMount() {
     const arr = await getAllComments(this.props.postID)
-    this.setState({ comment_arr: [...arr, ...this.state.comment_arr] })
+    this.setState({
+      comment_arr: [...arr, ...this.state.comment_arr],
+      loading: false,
+    })
   }
 
   render() {
+    if (this.state.loading) {
+      return "loading...."
+    }
     return (
       <div>
         <label style={{ display: "block" }}>Comments:</label>
