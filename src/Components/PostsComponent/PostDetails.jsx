@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import getUniquePost from "../../helpers/getUniquePost"
+import Comment from "../CommentComponent/Comment"
 
 class PostDetails extends Component {
   state = {
@@ -7,7 +8,6 @@ class PostDetails extends Component {
     loading: true,
   }
   async componentDidMount() {
-    console.log(this.props)
     const uniquePost = await getUniquePost(this.props.id)
     this.setState({ uniquePost: uniquePost, loading: false })
   }
@@ -19,6 +19,7 @@ class PostDetails extends Component {
       <div>
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
+        <Comment postID={post.id} />
       </div>
     )
   }

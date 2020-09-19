@@ -1,6 +1,5 @@
 import { Link } from "@reach/router"
 import React from "react"
-import PostDetails from "./PostDetails"
 
 class DisplayPosts extends React.Component {
   state = {
