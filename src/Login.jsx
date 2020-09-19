@@ -9,7 +9,11 @@ class Login extends React.Component {
     const userInfo = Object.values(userData)
     const userID = await userLogin(userInfo[2].profile)
     console.log(userID)
-    localStorage.setItem("user_arr", JSON.stringify(userInfo[2].profile))
+    const authUser = {
+      ...userInfo[2].profile,
+      userID: userID,
+    }
+    localStorage.setItem("user_arr", JSON.stringify(authUser))
     navigate("/home")
   }
 
