@@ -20,6 +20,7 @@ class AuthorisedHome extends React.Component {
 
   async componentDidMount() {
     const postsFromDb = await getAllPosts()
+    console.log(postsFromDb)
     this.setState({ posts_arr: postsFromDb, loading: false })
   }
 
@@ -28,6 +29,8 @@ class AuthorisedHome extends React.Component {
       title: title,
       description: desc,
       createdAt: new Date().getTime(),
+      owner: this.state.user_arr.id,
+      userName: this.state.user_arr.name,
     }
 
     const id = await createNewPost(newPost)
