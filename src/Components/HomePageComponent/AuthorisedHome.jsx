@@ -29,6 +29,7 @@ class AuthorisedHome extends React.Component {
       description: desc,
       createdAt: new Date().getTime(),
       owner: this.state.user_arr.id,
+      username: this.state.user_arr.name,
     }
 
     const id = await createNewPost(newPost)

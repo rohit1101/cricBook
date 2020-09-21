@@ -21,7 +21,6 @@ async function getAllPosts(options = { sortBy: "desc" }) {
     .get()
 
   for (let result of res.docs) {
-    console.log(result.data())
     const { owner } = result.data()
     const username = await getUserNameFromUserID(owner)
 

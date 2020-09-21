@@ -18,6 +18,7 @@ export default class Comment extends Component {
       comment: this.state.comment,
       createdAt: new Date().getTime(),
       owner: this.props.postData.owner,
+      username: this.props.postData.username,
     }
 
     const commentId = await createComment(this.props.postData.id, comment)
