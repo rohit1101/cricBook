@@ -20,7 +20,7 @@ async function getAllPosts(options = { sortBy: "desc" }) {
     .orderBy("createdAt", options.sortBy)
     .get()
 
-  for await (let result of res.docs) {
+  for (let result of res.docs) {
     const { owner } = result.data()
     const username = await getUserNameFromUserID(owner)
 
