@@ -1,6 +1,6 @@
 import { db } from "../firebaseConfig"
 
-async function getUserNameFromUserID(userId) {
+export async function getUserNameFromUserID(userId) {
   const userName = await db
     .collection("users")
     .doc(userId)
@@ -21,6 +21,7 @@ async function getAllPosts(options = { sortBy: "desc" }) {
     .get()
 
   for (let result of res.docs) {
+    console.log(result.data())
     const { owner } = result.data()
     const username = await getUserNameFromUserID(owner)
 

@@ -1,22 +1,25 @@
 import { db } from "../firebaseConfig"
+import { getUserNameFromUserID } from "./allPosts"
 
 export default async function getAllComments(postID) {
   let allComments = []
 
-  await db
+  const comments = await db
     .collection("posts")
     .doc(postID)
     .collection("comments")
     .get()
-    .then((doc) => {
-      doc.forEach((doc) => {
-        const comment = {
-          ...doc.data(),
-          commentId: doc.id,
-        }
-        allComments.push(comment)
-      })
-    })
+
+  for (let res of comments.docs) {
+    console.log(res.data())
+    const { owner } = res.data()
+    const comment = {
+      ...res.data(),
+      commentId: res.id,
+      username: await getUserNameFromUserID(owner),
+    }
+    allComments.push(comment)
+  }
 
   return allComments
 }

@@ -5,7 +5,7 @@ import Comment from "../CommentComponent/Comment"
 
 class PostDetails extends Component {
   state = {
-    uniquePost: [],
+    uniquePost: {},
     loading: true,
   }
   async componentDidMount() {
@@ -22,7 +22,7 @@ class PostDetails extends Component {
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
         <cite>Post by {post.username}</cite>
-        <Comment postID={post.id} />
+        <Comment postData={post} />
       </div>
     )
   }

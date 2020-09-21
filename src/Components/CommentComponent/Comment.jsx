@@ -17,9 +17,10 @@ export default class Comment extends Component {
     const comment = {
       comment: this.state.comment,
       createdAt: new Date().getTime(),
-      postID: this.props.postID,
+      owner: this.props.postData.owner,
     }
-    const commentId = await createComment(this.props.postID, comment)
+
+    const commentId = await createComment(this.props.postData.id, comment)
     const newComment = {
       commentId: commentId,
       ...comment,
@@ -32,7 +33,8 @@ export default class Comment extends Component {
   }
 
   async componentDidMount() {
-    const arr = await getAllComments(this.props.postID)
+    const arr = await getAllComments(this.props.postData.id)
+    console.log(arr)
     this.setState({
       comment_arr: [...arr, ...this.state.comment_arr],
       loading: false,
@@ -66,6 +68,7 @@ export default class Comment extends Component {
                 <div key={comment.commentId}>
                   <h3>{comment.comment}</h3>
                   <p>{new Date(comment.createdAt).toLocaleTimeString()}</p>
+                  <cite>by {comment.username}</cite>
                 </div>
               )
             })
