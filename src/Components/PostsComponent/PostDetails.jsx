@@ -1,3 +1,4 @@
+import { Link } from "@reach/router"
 import React, { Component } from "react"
 import getUniquePost from "../../helpers/getUniquePost"
 import Comment from "../CommentComponent/Comment"
@@ -17,8 +18,10 @@ class PostDetails extends Component {
     if (this.state.loading) return "loading..."
     return (
       <div>
+        <Link to="/home">Home</Link>
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
+        <cite>Post by {post.username}</cite>
         <Comment postID={post.id} />
       </div>
     )

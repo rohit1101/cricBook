@@ -34,7 +34,8 @@ class DisplayPosts extends React.Component {
               {posts_arr.map((post) => {
                 return (
                   <div key={post.id}>
-                    <Link to={`/post/${post.id}`}>{post.title}</Link>
+                    <Link to={`/post/${post.id}`}>{post.title}</Link> by{" "}
+                    {post.username}
                   </div>
                 )
               })}

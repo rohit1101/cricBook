@@ -1,14 +1,15 @@
 import { db } from "../firebaseConfig"
 
-function userNameFromID({ owner }) {
-  return db
+async function getUserNameFromUserID(userId) {
+  const userName = await db
     .collection("users")
-    .doc(owner)
+    .doc(userId)
     .get()
     .then((doc) => {
       const { username } = doc.data()
       return username
     })
+  return userName
 }
 
 async function getAllPosts(options = { sortBy: "desc" }) {
@@ -19,23 +20,26 @@ async function getAllPosts(options = { sortBy: "desc" }) {
     .orderBy("createdAt", options.sortBy)
     .get()
 
-  for (let i = 0; i < res.length; i++) {
-    const postData = res[i]
-    const userName = await userNameFromID(postData.data())
+  for await (let result of res.docs) {
+    const { owner } = result.data()
+    const username = await getUserNameFromUserID(owner)
+
     const post = {
-      ...postData.data(),
-      id: postData.id,
-      userName: userName,
+      ...result.data(),
+      id: result.id,
+      username: username,
     }
     allPosts.push(post)
   }
 
-  // await res.forEach(async (res) => {
-  //   const userName = await userNameFromID(res.data())
+  // res.forEach(async (res) => {
+  //   const { owner } = res.data()
+  //   const username = await getUserNameFromUserID(owner)
+
   //   const post = {
   //     ...res.data(),
   //     id: res.id,
-  //     userName: userName,
+  //     username: username,
   //   }
   //   allPosts.push(post)
   // })
