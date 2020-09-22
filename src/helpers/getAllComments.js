@@ -11,11 +11,10 @@ export default async function getAllComments(postID) {
     .get()
 
   for (let res of comments.docs) {
-    console.log(res.data())
     const { owner } = res.data()
     const comment = {
       ...res.data(),
-      commentId: res.id,
+      id: res.id,
       username: await getUserNameFromUserID(owner),
     }
     allComments.push(comment)

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import createComment from "../../helpers/createComment"
 import getAllComments from "../../helpers/getAllComments"
 
-export default class Comment extends Component {
+export default class CommentWithInput extends Component {
   state = {
     comment_arr: [],
     comment: "",
@@ -23,7 +23,7 @@ export default class Comment extends Component {
 
     const commentId = await createComment(this.props.postData.id, comment)
     const newComment = {
-      commentId: commentId,
+      id: commentId,
       ...comment,
     }
 
@@ -35,14 +35,15 @@ export default class Comment extends Component {
 
   async componentDidMount() {
     const arr = await getAllComments(this.props.postData.id)
-    console.log(arr)
     this.setState({
-      comment_arr: [...arr, ...this.state.comment_arr],
+      comment_arr: [...arr],
       loading: false,
     })
   }
 
   render() {
+    const { comment_arr: comment } = this.state
+    console.log(comment)
     if (this.state.loading) {
       return "loading...."
     }
@@ -63,16 +64,14 @@ export default class Comment extends Component {
           Submit
         </button>
 
-        {this.state.comment_arr && this.state.comment_arr.length
-          ? this.state.comment_arr.map((comment) => {
-              return (
-                <div key={comment.commentId}>
-                  <h3>{comment.comment}</h3>
-                  <p>{new Date(comment.createdAt).toLocaleTimeString()}</p>
-                  <cite>by {comment.username}</cite>
-                </div>
-              )
-            })
+        {comment && comment.length
+          ? comment.map((comment) => (
+              <div key={comment.id}>
+                <h3>{comment.comment}</h3>
+                <p>{new Date(comment.createdAt).toLocaleTimeString()}</p>
+                <cite>by {comment.username}</cite>
+              </div>
+            ))
           : "No comments"}
       </div>
     )

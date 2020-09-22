@@ -1,7 +1,7 @@
 import { Link } from "@reach/router"
 import React, { Component } from "react"
 import getUniquePost from "../../helpers/getUniquePost"
-import Comment from "../CommentComponent/Comment"
+import CommentWithInput from "../CommentComponent/CommentWithInput"
 
 class PostDetails extends Component {
   state = {
@@ -10,7 +10,7 @@ class PostDetails extends Component {
   }
   async componentDidMount() {
     const uniquePost = await getUniquePost(this.props.id)
-    this.setState({ uniquePost: uniquePost, loading: false })
+    this.setState({ uniquePost, loading: false })
   }
 
   render() {
@@ -22,7 +22,7 @@ class PostDetails extends Component {
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
         <cite>Post by {post.username}</cite>
-        <Comment postData={post} />
+        <CommentWithInput postData={post} />
       </div>
     )
   }
