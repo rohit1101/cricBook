@@ -18,6 +18,7 @@ async function getAllPosts(options = { sortBy: "desc" }) {
   const res = await db
     .collection("posts")
     .orderBy("createdAt", options.sortBy)
+    // .where("username", "!=", `${user.name}`)
     .get()
 
   for (let result of res.docs) {
