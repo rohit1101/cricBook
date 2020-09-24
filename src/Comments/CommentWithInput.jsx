@@ -43,7 +43,7 @@ export default class CommentWithInput extends Component {
 
   render() {
     const { comment_arr: comment } = this.state
-    console.log(comment)
+
     if (this.state.loading) {
       return "loading...."
     }
