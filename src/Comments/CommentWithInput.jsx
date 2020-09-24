@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import createComment from "../../helpers/createComment"
-import getAllComments from "../../helpers/getAllComments"
+import createComment from "../helpers/createComment"
+import getAllComments from "../helpers/getAllComments"
 
 export default class CommentWithInput extends Component {
   state = {

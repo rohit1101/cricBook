@@ -1,7 +1,7 @@
 import { Link } from "@reach/router"
 import React, { Component } from "react"
-import getUniquePost from "../../helpers/getUniquePost"
-import CommentWithInput from "../CommentComponent/CommentWithInput"
+import getUniquePost from "../helpers/getUniquePost"
+import CommentWithInput from "../Comments/CommentWithInput"
 
 class PostDetails extends Component {
   state = {

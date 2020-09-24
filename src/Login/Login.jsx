@@ -1,7 +1,7 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
-import { googleAuthHandler } from "./firebaseConfig"
-import userLogin from "./helpers/userLogin"
+import { googleAuthHandler } from "../firebaseConfig"
+import userLogin from "../helpers/userLogin"
 
 class Login extends React.Component {
   handleAuthClick = async (e) => {

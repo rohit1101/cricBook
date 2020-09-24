@@ -1,8 +1,8 @@
 import React from "react"
 import { Router } from "@reach/router"
-import Login from "./Login"
-import AuthorisedHome from "./Components/HomePageComponent/AuthorisedHome"
-import PostDetails from "./Components/PostsComponent/PostDetails"
+import Login from "./Login/Login"
+import AuthorisedHome from "./Home/AuthorisedHome"
+import PostDetails from "./Posts/PostDetails"
 
 function Route() {
   return (

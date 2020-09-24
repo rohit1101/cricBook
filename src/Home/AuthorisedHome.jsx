@@ -1,10 +1,10 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
 import UserInfo from "./UserInfo"
-import DisplayPosts from "../PostsComponent/DisplayPosts"
-import createNewPost from "../../helpers/CreatePosts"
-import CreatePostInput from "../PostsComponent/CreatePostInput"
-import getAllPosts from "../../helpers/allPosts"
+import DisplayPosts from "../Posts/DisplayPosts"
+import createNewPost from "../helpers/CreatePosts"
+import CreatePostInput from "../Posts/CreatePostInput"
+import getAllPosts from "../helpers/allPosts"
 
 class AuthorisedHome extends React.Component {
   state = {
@@ -38,6 +38,7 @@ class AuthorisedHome extends React.Component {
     this.setState({
       posts_arr: [newPostWithId, ...this.state.posts_arr],
     })
+    navigate(`/post/${id}`)
   }
 
   sortPosts = async (sortBy) => {
