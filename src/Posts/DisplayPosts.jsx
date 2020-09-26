@@ -1,3 +1,4 @@
+import { Link } from "@reach/router"
 import React from "react"
 
 class DisplayPosts extends React.Component {
@@ -33,12 +34,8 @@ class DisplayPosts extends React.Component {
               {posts_arr.map((post) => {
                 return (
                   <div key={post.id}>
-                    <h1>{post.title}</h1>
-                    <h2>{post.description}</h2>
-                    <h3>
-                      posted at{" "}
-                      {new Date(Number(post.createdAt)).toLocaleTimeString()}.
-                    </h3>
+                    <Link to={`/post/${post.id}`}>{post.title}</Link> by{" "}
+                    {post.username}
                   </div>
                 )
               })}
