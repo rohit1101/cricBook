@@ -32,19 +32,30 @@ async function getAllPosts(options = { sortBy: "desc" }) {
     allPosts.push(post)
   }
 
-  // res.forEach(async (res) => {
-  //   const { owner } = res.data()
-  //   const username = await getUserNameFromUserID(owner)
-
-  //   const post = {
-  //     ...res.data(),
-  //     id: res.id,
-  //     username: username,
-  //   }
-  //   allPosts.push(post)
-  // })
-
   return allPosts
+}
+
+export async function otherPosts(options = { sortBy: "desc" }) {
+  let otherPosts = []
+
+  const res = await db
+    .collection("posts")
+    .orderBy("createdAt", options.sortBy)
+    .get()
+
+  for (let result of res.docs) {
+    const { owner } = result.data()
+    const username = await getUserNameFromUserID(owner)
+
+    const post = {
+      ...result.data(),
+      id: result.id,
+      username: username,
+    }
+    otherPosts.push(post)
+  }
+
+  return otherPosts
 }
 
 export default getAllPosts
