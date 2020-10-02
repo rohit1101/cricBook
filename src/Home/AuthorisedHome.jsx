@@ -5,6 +5,7 @@ import DisplayPosts from "../Posts/DisplayPosts"
 import createNewPost from "../helpers/CreatePosts"
 import CreatePostInput from "../Posts/CreatePostInput"
 import getAllPosts from "../helpers/allPosts"
+import filterAllPosts from "../helpers/FilterPosts"
 
 class AuthorisedHome extends React.Component {
   state = {
@@ -19,7 +20,9 @@ class AuthorisedHome extends React.Component {
   }
 
   async componentDidMount() {
-    const postsFromDb = await getAllPosts()
+    // const postsFromDb = await getAllPosts()
+    const postsFromDb = await filterAllPosts(this.state.user_arr)
+
     this.setState({ posts_arr: postsFromDb, loading: false })
   }
 
