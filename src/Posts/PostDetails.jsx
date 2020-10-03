@@ -19,6 +19,7 @@ class PostDetails extends Component {
     return (
       <div>
         <Link to="/home">Home</Link>
+        <Link to={`/posts/${post.name}`}>Your Posts</Link>
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
         <cite>Post by {post.username}</cite>

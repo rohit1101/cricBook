@@ -1,4 +1,4 @@
-// Remove the React readme Put a proper readme
+// Put a proper readme
 // explaining about the app, what you’re using
 // your file structure and setup instructions PR description on what is there in here
 // And follow a commit discipline like this https://zulip.readthedocs.io/en/latest/contributing/version-control.html

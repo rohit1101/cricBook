@@ -1,5 +1,5 @@
 import React from "react"
-import { navigate, Redirect } from "@reach/router"
+import { Link, navigate, Redirect } from "@reach/router"
 import UserInfo from "./UserInfo"
 import DisplayPosts from "../Posts/DisplayPosts"
 import createNewPost from "../helpers/CreatePosts"
@@ -60,6 +60,7 @@ class AuthorisedHome extends React.Component {
               userProfile={this.state.user_arr}
               logOutHandler={this.handleLogOutClick}
             />
+            <Link to={`/posts/${this.state.user_arr.name}`}>Your Posts</Link>
             <CreatePostInput createCricPost={this.createNewPost} />
             <DisplayPosts
               posts_arr={this.state.posts_arr}

@@ -17,6 +17,10 @@ class DisplayPosts extends React.Component {
     if (loading) {
       return "loading..."
     }
+    const formatter = new Intl.DateTimeFormat("en", {
+      timeStyle: "medium",
+      dataStyle: "short",
+    })
 
     return (
       <div>
@@ -36,6 +40,13 @@ class DisplayPosts extends React.Component {
                   <div key={post.id}>
                     <Link to={`/post/${post.id}`}>{post.title}</Link> by{" "}
                     {post.username}
+                    <p>
+                      created{" "}
+                      {formatter.format(
+                        new Date(post.createdAt).getTime(),
+                        "hours"
+                      )}
+                    </p>
                   </div>
                 )
               })}
