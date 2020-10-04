@@ -2,7 +2,6 @@ import { db } from "../firebaseConfig"
 import { getUserNameFromUserID } from "./allPosts"
 
 async function filterYourPosts(arr) {
-  console.log(arr)
   let filterPosts = []
   const res = await db.collection("posts").orderBy("createdAt", "desc").get()
 

@@ -20,7 +20,6 @@ class AuthorisedHome extends React.Component {
   }
 
   async componentDidMount() {
-    // const postsFromDb = await getAllPosts()
     const postsFromDb = await filterAllPosts(this.state.user_arr)
 
     this.setState({ posts_arr: postsFromDb, loading: false })

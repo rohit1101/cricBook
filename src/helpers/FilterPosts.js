@@ -2,8 +2,7 @@
 // explaining about the app, what you’re using
 // your file structure and setup instructions PR description on what is there in here
 // And follow a commit discipline like this https://zulip.readthedocs.io/en/latest/contributing/version-control.html
-// User once logged in should see all posts of other users. ✅
-// Relative time (1 day ago or 2 hrs ago etc) Create a your posts route which displays all my posts
+// Relative time (1 day ago or 2 hrs ago etc)
 
 import { db } from "../firebaseConfig"
 import { getUserNameFromUserID } from "./allPosts"
