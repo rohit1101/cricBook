@@ -1,5 +1,6 @@
 import { Link } from "@reach/router"
 import React from "react"
+import { UserConsumer } from "../Context"
 
 class DisplayPosts extends React.Component {
   state = {
@@ -10,9 +11,11 @@ class DisplayPosts extends React.Component {
     this.setState({ sortValue: target.value })
     this.props.sortPosts(target.value)
   }
+  static contextType = UserConsumer
 
   render() {
     const { loading, posts_arr } = this.props
+    console.log(this.context)
 
     if (loading) {
       return "loading..."

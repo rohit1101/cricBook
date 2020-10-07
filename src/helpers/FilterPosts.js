@@ -11,8 +11,6 @@ async function filterAllPosts(arr) {
   let filterPosts = []
   const res = await db.collection("posts").orderBy("createdAt", "desc").get()
 
-  console.log(filterPosts)
-
   for (let result of res.docs) {
     const { owner } = result.data()
     const username = await getUserNameFromUserID(owner)

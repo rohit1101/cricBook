@@ -6,6 +6,7 @@ import createNewPost from "../helpers/CreatePosts"
 import CreatePostInput from "../Posts/CreatePostInput"
 import getAllPosts from "../helpers/allPosts"
 import filterAllPosts from "../helpers/FilterPosts"
+import { UserProvider } from "../Context"
 
 class AuthorisedHome extends React.Component {
   state = {
@@ -21,7 +22,6 @@ class AuthorisedHome extends React.Component {
 
   async componentDidMount() {
     const postsFromDb = await filterAllPosts(this.state.user_arr)
-
     this.setState({ posts_arr: postsFromDb, loading: false })
   }
 
@@ -55,17 +55,19 @@ class AuthorisedHome extends React.Component {
           <Redirect to="/" noThrow />
         ) : (
           <div>
-            <UserInfo
-              userProfile={this.state.user_arr}
-              logOutHandler={this.handleLogOutClick}
-            />
+            <UserProvider value={this.state.user_arr}>
+              <UserInfo logOutHandler={this.handleLogOutClick} />
+            </UserProvider>
+
             <Link to={`/posts/${this.state.user_arr.name}`}>Your Posts</Link>
             <CreatePostInput createCricPost={this.createNewPost} />
-            <DisplayPosts
-              posts_arr={this.state.posts_arr}
-              loading={this.state.loading}
-              sortPosts={this.sortPosts}
-            />
+            <UserProvider value={this.state.user_arr}>
+              <DisplayPosts
+                posts_arr={this.state.posts_arr}
+                loading={this.state.loading}
+                sortPosts={this.sortPosts}
+              />
+            </UserProvider>
           </div>
         )}
       </div>
