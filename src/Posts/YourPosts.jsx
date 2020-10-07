@@ -15,12 +15,9 @@ export default class YourPosts extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-    console.log(this.yourPosts)
     const posts_arr = this.state.yourPosts_arr
-    if (this.state.loading) {
-      return "loading..."
-    }
+    if (this.state.loading) return "loading..."
+
     return (
       <div>
         <Link to="/home">Home</Link> <h1>Your Posts</h1>
