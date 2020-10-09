@@ -26,8 +26,10 @@ class Login extends React.Component {
             </div>
             <div className={styles.content}>
               <div className={styles.text}>
-                <h1>CricBook</h1>
-                <p>Social Media for Cricket Freaks</p>
+                <p>
+                  Cricbook helps you connect and share about cricket around the
+                  world.
+                </p>
                 <button
                   onClick={this.handleAuthClick}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
