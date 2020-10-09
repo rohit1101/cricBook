@@ -26,7 +26,7 @@
 
       p {
         font-size: 2rem;
-        padding: 1rem 0;
+        padding: 2rem 0;
         color: #24285b;
         font-weight: 300;
       }
@@ -39,6 +39,10 @@
         padding: 1rem 1rem;
         color: #b1731b;
         font-weight: 600;
+      }
+      button:hover {
+        color: #24285b;
+        background-color: #c5eef7;
       }
     }
 
