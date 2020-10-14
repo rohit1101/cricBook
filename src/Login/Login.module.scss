@@ -39,7 +39,9 @@
         padding: 1rem 1rem;
         color: #b1731b;
         font-weight: 600;
+        transition: 0.5s;
       }
+
       button:hover {
         color: #24285b;
         background-color: #c5eef7;
@@ -47,7 +49,6 @@
     }
 
     .image {
-      display: flex;
       img {
         height: 50rem;
       }
