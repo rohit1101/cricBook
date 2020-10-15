@@ -4,13 +4,13 @@ import "firebase/firestore"
 import "firebase/auth"
 
 let firebaseConfig = {
-  apiKey: "AIzaSyCpJg7OzbzUzjH9gEZVEumnTZAhyQhZExQ",
-  authDomain: "cricbook-7f579.firebaseapp.com",
-  databaseURL: "https://cricbook-7f579.firebaseio.com",
-  projectId: "cricbook-7f579",
-  storageBucket: "cricbook-7f579.appspot.com",
-  messagingSenderId: "769472130779",
-  appId: "1:769472130779:web:c60c3dd24d6d5e6d3566fe",
+  apiKey: "AIzaSyCVV_5TyEljqfEJnyTxwPv-92NERKSCgog",
+  authDomain: "cricbook-v2.firebaseapp.com",
+  databaseURL: "https://cricbook-v2.firebaseio.com",
+  projectId: "cricbook-v2",
+  storageBucket: "cricbook-v2.appspot.com",
+  messagingSenderId: "502775188257",
+  appId: "1:502775188257:web:556ea7c535b37887a48c60"
 }
 
 firebase.initializeApp(firebaseConfig)
