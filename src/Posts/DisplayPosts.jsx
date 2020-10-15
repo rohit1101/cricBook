@@ -2,6 +2,8 @@ import { Link } from "@reach/router"
 import React from "react"
 
 
+
+
 class DisplayPosts extends React.Component {
   state = {
     sortValue: "",
@@ -12,8 +14,11 @@ class DisplayPosts extends React.Component {
     this.props.sortPosts(target.value)
   }
   
+  
 
   render() {
+      
+  
     const { loading, posts_arr } = this.props
     if (loading) {
       return "loading..."
@@ -22,6 +27,8 @@ class DisplayPosts extends React.Component {
       timeStyle: "medium",
       dataStyle: "short",
     })
+
+    
 
     return (
       <div>

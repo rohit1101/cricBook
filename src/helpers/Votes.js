@@ -1,10 +1,14 @@
 import {db} from '../firebaseConfig'
 
 
-export default function votes(id) {
-    const updateRef=db.collection('posts').doc(id).update({
-        upvote:[],
-        downvote:[]
+export async function upVotes(postID,upVote) {
+        return await db.collection('posts').doc(postID).update({
+        upvotes:upVote,
     })
-    return updateRef
+}
+
+export async function downVotes(postID,downVote) {
+    return await db.collection('posts').doc(postID).update({
+        downvotes: downVote
+    })
 }
