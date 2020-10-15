@@ -1,5 +1,6 @@
 import { Link } from "@reach/router"
 import React from "react"
+import { UserConsumer } from "../Context"
 
 class DisplayPosts extends React.Component {
   state = {
@@ -10,13 +11,19 @@ class DisplayPosts extends React.Component {
     this.setState({ sortValue: target.value })
     this.props.sortPosts(target.value)
   }
+  static contextType = UserConsumer
 
   render() {
     const { loading, posts_arr } = this.props
+    console.log(this.context)
 
     if (loading) {
       return "loading..."
     }
+    const formatter = new Intl.DateTimeFormat("en", {
+      timeStyle: "medium",
+      dataStyle: "short",
+    })
 
     return (
       <div>
@@ -36,6 +43,13 @@ class DisplayPosts extends React.Component {
                   <div key={post.id}>
                     <Link to={`/post/${post.id}`}>{post.title}</Link> by{" "}
                     {post.username}
+                    <p>
+                      created{" "}
+                      {formatter.format(
+                        new Date(post.createdAt).getTime(),
+                        "hours"
+                      )}
+                    </p>
                   </div>
                 )
               })}
