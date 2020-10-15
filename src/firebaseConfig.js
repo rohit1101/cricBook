@@ -18,7 +18,6 @@ firebase.initializeApp(firebaseConfig)
 export async function googleAuthHandler() {
   let provider = new firebase.auth.GoogleAuthProvider()
   let data = await firebase.auth().signInWithPopup(provider)
-
   return data
 }
 
