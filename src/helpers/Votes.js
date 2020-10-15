@@ -1,14 +1,14 @@
 import {db} from '../firebaseConfig'
 
 
-export async function upVotes(postID,upVote) {
+export async function upVotes(postID,newUpVotesArr) {
         return await db.collection('posts').doc(postID).update({
-        upvotes:upVote,
+        upvotes: newUpVotesArr
     })
 }
 
-export async function downVotes(postID,downVote) {
+export async function downVotes(postID,newDownVotesArr) {
     return await db.collection('posts').doc(postID).update({
-        downvotes: downVote
+        downvotes: newDownVotesArr
     })
 }

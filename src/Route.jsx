@@ -5,11 +5,7 @@ import AuthorisedHome from "./Home/AuthorisedHome"
 import PostDetails from "./Posts/PostDetails"
 import YourPosts from "./Posts/YourPosts"
 
-
-
 function Route() {
-  
-  
   return (
     <Router>
       <Login path="/" exact />

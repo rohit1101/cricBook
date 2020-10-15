@@ -15,30 +15,29 @@ class PostDetails extends Component {
   async componentDidMount() {
     const uniquePost = await getUniquePost(this.props.id)
     this.setState({ uniquePost, loading: false })
-    
   }
   
-  handleVotes= async (e)=> {
-    console.log(e.target.value)
+  handleUpVotes= async (e)=> {
     const {id}=JSON.parse(localStorage.getItem('user_arr')) 
-    
-    if(e.target.value === 'like')
-    { 
 
-      const upVote=[]      
-      upVote.push({id})
-      this.setState({uniquePost:{...this.state.uniquePost,upvotes: upVote}})
-      await upVotes(this.state.uniquePost.id,upVote)  
+    const upVote= [...this.state.uniquePost.upvotes] 
+    if(!upVote.includes(id)) {
+      upVote.push(id)    
     }
+    this.setState({uniquePost:{...this.state.uniquePost,upvotes: upVote}})
+    await upVotes(this.state.uniquePost.id,upVote)  
+  }
 
-    if(e.target.value === 'dislike')
-    { 
-      const downVote=[]      
-      downVote.push({id})
-      this.setState({uniquePost:{...this.state.uniquePost,downvotes: downVote}})
-      await downVotes(this.state.uniquePost.id,downVote) 
+  handleDownVotes=async(e) => {
+    const {id}=JSON.parse(localStorage.getItem('user_arr')) 
+
+    const downVote= [...this.state.uniquePost.downvotes] 
+    if(!downVote.includes(id)) {
+      downVote.push(id)    
     }
-    
+    this.setState({uniquePost:{...this.state.uniquePost,downvotes: downVote}})
+    await downVotes(this.state.uniquePost.id,downVote)  
+
   }
 
   render() {
@@ -52,8 +51,8 @@ class PostDetails extends Component {
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
         <cite style={{display:'block'}}>Post by {post.username}</cite>
-        <button onClick={this.handleVotes} value='like'>like</button>        
-        <button onClick={this.handleVotes} value='dislike'>dislike</button>
+        <button onClick={this.handleUpVotes} >like</button>        
+        <button onClick={this.handleDownVotes} value='dislike'>dislike</button>
         <CommentWithInput postData={post} />
       </div>
     )
