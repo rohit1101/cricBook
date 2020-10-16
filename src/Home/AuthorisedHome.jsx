@@ -32,8 +32,8 @@ class AuthorisedHome extends React.Component {
       createdAt: new Date().getTime(),
       owner: this.state.user_arr.id,
       username: this.state.user_arr.name,
-      upvotes:[],
-      downvotes:[]
+      upvotes: [],
+      downvotes: [],
     }
 
     const id = await createNewPost(newPost)
@@ -59,12 +59,11 @@ class AuthorisedHome extends React.Component {
           <div>
             <UserProvider value={this.state.user_arr}>
               <UserInfo logOutHandler={this.handleLogOutClick} />
-            
 
-            <Link to={`/posts/${this.state.user_arr.name}`}>Your Posts</Link>
+              <Link to={`/posts/${this.state.user_arr.name}`}>Your Posts</Link>
 
-            <CreatePostInput createCricPost={this.createNewPost} />
-            
+              <CreatePostInput createCricPost={this.createNewPost} />
+
               <DisplayPosts
                 posts_arr={this.state.posts_arr}
                 loading={this.state.loading}
