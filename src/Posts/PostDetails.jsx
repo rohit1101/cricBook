@@ -1,8 +1,9 @@
 import { Link } from "@reach/router"
 import React, { Component } from "react"
-import getUniquePost from "../helpers/getUniquePost"
+import { getUniquePost } from "../helpers/posts"
 import CommentWithInput from "../Comments/CommentWithInput"
-import { downVotes, upVotes } from "../helpers/Votes"
+import { downVotes, upVotes } from "../helpers/posts"
+import UserContext from "../Context"
 
 class PostDetails extends Component {
   state = {
@@ -10,13 +11,15 @@ class PostDetails extends Component {
     loading: true,
   }
 
+  static contextType = UserContext
+
   async componentDidMount() {
     const uniquePost = await getUniquePost(this.props.id)
     this.setState({ uniquePost, loading: false })
   }
 
   handleUpVotes = async (e) => {
-    const { id } = JSON.parse(localStorage.getItem("user_arr"))
+    const { id } = this.context
 
     const upVote = [...this.state.uniquePost.upvotes]
     if (!upVote.includes(id)) {
@@ -27,7 +30,7 @@ class PostDetails extends Component {
   }
 
   handleDownVotes = async (e) => {
-    const { id } = JSON.parse(localStorage.getItem("user_arr"))
+    const { id } = this.context
 
     const downVote = [...this.state.uniquePost.downvotes]
     if (!downVote.includes(id)) {
@@ -39,18 +42,27 @@ class PostDetails extends Component {
     await downVotes(this.state.uniquePost.id, downVote)
   }
 
+  decider = (type) => async () => {
+    if (type === 'upvote') {
+      this.handleUpVotes()
+    } else if (type === 'downvote') {
+      this.handleDownVotes()
+    }
+  }
+
   render() {
     const post = this.state.uniquePost
     if (this.state.loading) return "loading..."
     return (
       <div>
-        <Link to="/home">Home</Link>
-        <Link to={`/posts/${post.name}`}>Your Posts</Link>
+        <Link to="/">Home</Link>
+        <Link to={`/yourposts`}>Your Posts</Link>
         <h1>{post.title}</h1>
         <h2>{post.description}</h2>
         <cite style={{ display: "block" }}>Post by {post.username}</cite>
-        <button onClick={this.handleUpVotes}>like</button>
-        <button onClick={this.handleDownVotes} value="dislike">
+        {post.upvotes.length} Likes {post.downvotes.length} Dislikes
+        <button onClick={this.decider('upvote')}>like</button>
+        <button onClick={this.decider('downvote')} value="dislike">
           dislike
         </button>
         <CommentWithInput postData={post} />

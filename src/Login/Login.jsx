@@ -1,10 +1,12 @@
 import React from "react"
 import { navigate, Redirect } from "@reach/router"
 import { googleAuthHandler } from "../firebaseConfig"
-import userLogin from "../helpers/userLogin"
+import userLogin from "../helpers/users"
 import styles from "./Login.module.scss"
 import image from "../authentication.svg"
 import logo from "../logo.png"
+import UserContext from "../Context"
+
 class Login extends React.Component {
   handleAuthClick = async () => {
     const userData = await googleAuthHandler()
@@ -14,10 +16,12 @@ class Login extends React.Component {
     navigate("/home")
   }
 
+  static contextType = UserContext
+
   render() {
     return (
       <div>
-        {localStorage.user_arr ? (
+        {this.context && this.context.id ? (
           <Redirect to="/home" noThrow />
         ) : (
           <div className={styles.header}>
