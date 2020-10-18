@@ -1,27 +1,28 @@
 import React from "react"
-import { Link, navigate, Redirect } from "@reach/router"
+import { Link, navigate } from "@reach/router"
 import UserInfo from "./UserInfo"
 import DisplayPosts from "../Posts/DisplayPosts"
-import createNewPost from "../helpers/CreatePosts"
 import CreatePostInput from "../Posts/CreatePostInput"
-import getAllPosts from "../helpers/allPosts"
-import filterAllPosts from "../helpers/FilterPosts"
-import { UserProvider } from "../Context"
+
+import { getAllPosts, createNewPost } from "../helpers/posts"
+import UserContext from "../Context"
+import { LOGIN_PAGE } from "../constants"
 
 class AuthorisedHome extends React.Component {
   state = {
-    user_arr: JSON.parse(localStorage.getItem("user_arr")),
     loading: true,
     posts_arr: [],
   }
 
+  static contextType = UserContext
+
   handleLogOutClick = (e) => {
     localStorage.removeItem("user_arr")
-    navigate("/")
+    navigate(LOGIN_PAGE)
   }
 
   async componentDidMount() {
-    const postsFromDb = await filterAllPosts(this.state.user_arr)
+    const postsFromDb = await getAllPosts({ user: this.context })
     this.setState({ posts_arr: postsFromDb, loading: false })
   }
 
@@ -30,8 +31,8 @@ class AuthorisedHome extends React.Component {
       title: title,
       description: desc,
       createdAt: new Date().getTime(),
-      owner: this.state.user_arr.id,
-      username: this.state.user_arr.name,
+      owner: this.context.id,
+      username: this.context.name,
       upvotes: [],
       downvotes: [],
     }
@@ -46,32 +47,26 @@ class AuthorisedHome extends React.Component {
   }
 
   sortPosts = async (sortBy) => {
-    const sortedArr = await getAllPosts({ sortBy })
+    const sortedArr = await getAllPosts({ sortBy, user: this.context })
     this.setState({ posts_arr: sortedArr })
   }
 
   render() {
     return (
       <div>
-        {!localStorage.user_arr ? (
-          <Redirect to="/" noThrow />
-        ) : (
-          <div>
-            <UserProvider value={this.state.user_arr}>
-              <UserInfo logOutHandler={this.handleLogOutClick} />
+        <div>
+            <UserInfo logOutHandler={this.handleLogOutClick} />
 
-              <Link to={`/posts/${this.state.user_arr.name}`}>Your Posts</Link>
+            <Link to={`/yourposts`}>Your Posts</Link>
 
-              <CreatePostInput createCricPost={this.createNewPost} />
+            <CreatePostInput createCricPost={this.createNewPost} />
 
-              <DisplayPosts
-                posts_arr={this.state.posts_arr}
-                loading={this.state.loading}
-                sortPosts={this.sortPosts}
-              />
-            </UserProvider>
-          </div>
-        )}
+            <DisplayPosts
+              posts_arr={this.state.posts_arr}
+              loading={this.state.loading}
+              sortPosts={this.sortPosts}
+            />
+        </div>
       </div>
     )
   }

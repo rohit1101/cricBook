@@ -1,7 +1,16 @@
 import { db } from "../firebaseConfig"
-import { getUserNameFromUserID } from "./allPosts"
+import { getUserNameFromUserID } from "./posts"
 
-export default async function getAllComments(postID) {
+export async function createComment(postID, comment) {
+  return await db
+    .collection("posts")
+    .doc(postID)
+    .collection("comments")
+    .add(comment)
+    .then((doc) => doc.id)
+}
+
+export async function getAllComments(postID) {
   let allComments = []
 
   const comments = await db
