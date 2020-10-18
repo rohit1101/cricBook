@@ -10,7 +10,7 @@ function Route() {
     <Router>
       <Login path="/" exact />
       <AuthorisedHome path="/home" exact />
-      <PostDetails path="/post/:id" exact />
+      <PostDetails path="/post/:id"  exact />
       <YourPosts path="/posts/:name" exact />
     </Router>
   )

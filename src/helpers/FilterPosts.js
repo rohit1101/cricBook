@@ -1,8 +1,3 @@
-// Put a proper readme
-// explaining about the app, what you’re using
-// your file structure and setup instructions PR description on what is there in here
-// And follow a commit discipline like this https://zulip.readthedocs.io/en/latest/contributing/version-control.html
-// Relative time (1 day ago or 2 hrs ago etc)
 
 import { db } from "../firebaseConfig"
 import { getUserNameFromUserID } from "./allPosts"
