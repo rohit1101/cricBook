@@ -9,7 +9,7 @@
 
 3.Users can follow each other to share and view their content.
 
-4.🌃 Dark mode - 🌇 light mode toggle.
+4.Dark mode - light mode toggle.
 
 5.Suggest famous cricket related podcasts or videos.
 
